@@ -6,8 +6,8 @@ OAuth is an open standard for authorization used to sign into 3rd party APIs
 without exposing your password.
 
 For more information, check out these sources:
-<https://oauth.net/2/>
-<https://aaronparecki.com/2012/07/29/2/oauth2-simplified>
+-<https://oauth.net/2/>
+-<https://aaronparecki.com/2012/07/29/2/oauth2-simplified>
 
 # Some common OAuth providers:
 

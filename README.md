@@ -5,7 +5,9 @@
 OAuth is an open standard for authorization used to sign into 3rd party APIs
 without exposing your password.
 
-https://oauth.net/2/
+For more information, check out these sources:
+<https://oauth.net/2/>
+<https://aaronparecki.com/2012/07/29/2/oauth2-simplified>
 
 # Some common OAuth providers:
 
@@ -48,7 +50,7 @@ The User: “resource owner"
 - (OAuth only) The response includes an access token which the application can use to gain direct access to the identity provider's services on the user's behalf.
 
 When working with an API, like Google in today's example, a developer can simply sign up via
-https://console.developers.google.com/ to get access to their API libraries.
+<https://console.developers.google.com/> to get access to their API libraries.
 
 There, you first create a new project and sign up to get credentials.  The two main
 credentialing values consist of:
@@ -61,14 +63,14 @@ These will be used by the REST API to authenticate you.\
 let apiKey = 'YOUR_API_KEY';
 
     // Enter a client ID for a web application from the Google API Console:
-    //   https://console.developers.google.com/apis/credentials?project=_
+    //   <https://console.developers.google.com/apis/credentials?project=_>
     // In your API Console project, add a JavaScript origin that corresponds
     //   to the domain where you will be running the script.
 
 let clientId = 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com';
 
     // Enter one or more authorization scopes. Refer to the documentation for
-    // the API or https://developers.google.com/identity/protocols/googlescopes
+    // the API or <https://developers.google.com/identity/protocols/googlescopes>
     // for details.
 
 let scopes = 'profile';

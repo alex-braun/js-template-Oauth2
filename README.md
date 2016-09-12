@@ -1,5 +1,7 @@
 # Using OAuth 2.0 to use APIs
 
+![picture](oauth-2.png)
+
 OAuth is an open standard for authorization used to sign into 3rd party APIs
 without exposing your password.
 

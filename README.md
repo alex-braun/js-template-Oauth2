@@ -9,7 +9,8 @@ This is an authorization protocol, rather than an authentication protocol.
 - Authentication deals with verifying your identity.
 - Once authentication has been verified, authorization asks "What are you allowed?"
 
-![alt tag](OpenlDvs.Pseudo-AuthenticationusingOAuth.svg.png)
+![alt tag](https://en.wikipedia.org/wiki/File:OpenIDvs.Pseudo-AuthenticationusingOAuth.svg)
+
 
 
 - (Not pictured) The user requests a resource or site login from the application.

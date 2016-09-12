@@ -57,7 +57,25 @@ credentialing values consist of:
 - a client_id
 - an API Key
 
-These will be used by the REST API to authenticate you.\
+These will be used by the REST API to authenticate you.
+
+An example of the URL stucture:
+```
+//Client side:
+let clientId = '387636757294.apps.googleusercontent.com’;
+let authorizationUrlBase = ‘https://accounts.google.com/o/oauth2/auth';
+let redirectUri = ‘https://taskmandemo.appspot.com/oauth2callback.html';
+let scope = ‘https://www.googleapis.com/auth/tasks';
+
+function startOauth() {
+     let url = authorizationUrlBase;
+     url += ‘?response_type=token'
+          + ‘&redirect_uri=‘ + encodeURIComponent(redirectUri)
+          + ‘&client_id=‘ + encodeURIComponent(clientId)
+          + ‘&scope=‘ + encodeURIComponent(scope);
+     let w = window.open(url, ‘oauth’, ‘width=500, height=400’);
+     }
+```
 
 ```
 let apiKey = 'YOUR_API_KEY';

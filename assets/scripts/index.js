@@ -6,28 +6,48 @@
 // use require without a reference to ensure a file is bundled
 require('./example');
 
-//https://developers.google.com/api-client-library/javascript/samples/samples#LoadinganAPIandMakingaRequest
-// function appendResults(text) {
-//         let results = document.getElementById('results');
-//         results.appendChild(document.createElement('P'));
-//         results.appendChild(document.createTextNode(text));
-//       }
+//https://developers.google.com/api-client-library/javascript/start/start-js
+// var apiKey = 'YOUR_API_KEY';
+// var clientId = 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com';
+// var scopes = 'profile';
 //
-// function makeRequest() {
-//   let request = gapi.client.urlshortener.url.get({
-//     'shortUrl': 'http://goo.gl/fbsS'
-//   });
+// function initAuth() {
+//   gapi.client.setApiKey(apiKey);
+//   gapi.auth2.init({
+//       client_id: clientId,
+//       scope: scopes
+//   }).then(function () {
+//     // Listen for sign-in state changes.
+//     gapi.auth2.getAuthInstance().isSignedIn.listen(updateSigninStatus);
 //
-//   request.then(function(response) {
-//     appendResults(response.result.longUrl);
-//   }, function(reason) {
-//     console.log('Error: ' + reason.result.error.message);
+//     signinButton.addEventListener("click", handleSigninClick);
 //   });
 // }
 //
-// function init() {
-//   gapi.client.setApiKey('AIzaSyDWFafdDL7lofPzZPLY3RuTmacbQ3W13jk');
-//   gapi.client.load('urlshortener', 'v1').then(makeRequest);
+// // Get authorization from the user to access profile info
+// function handleSigninClick(event) {
+//   gapi.auth2.getAuthInstance().signIn().then(function() {
+//     makeApiCall();
+//   });
 // }
 //
-// gapi.load('client', init);
+// gapi.load('client:auth2', initAuth);
+//
+// // Load the API and make an API call.  Display the results on the screen.
+// function makeApiCall() {
+//   gapi.client.load('people', 'v1', function() {
+//     var request = gapi.client.people.people.get({
+//       resourceName: 'people/me'
+//     });
+//     request.execute(function(resp) {
+//       var p = document.createElement('p');
+//       var name = resp.names[0].givenName;
+//       p.appendChild(document.createTextNode('Hello, '+name+'!'));
+//       document.body.appendChild(p);
+//     });
+//   });
+//   // Note: In this example, we use the People API to get the current
+//   // user's name. In a real app, you would likely get basic profile info
+//   // from the GoogleUser object to avoid the extra network round trip.
+//   console.log(auth2.currentUser.get().getBasicProfile().getGivenName());
+// }

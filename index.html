@@ -8,13 +8,13 @@
       <!-- <script src="https://apis.google.com/js/api.js"></script> -->
       <!-- <script>
         function appendResults(text) {
-          let results = document.getElementById('results');
+          var results = document.getElementById('results');
           results.appendChild(document.createElement('P'));
           results.appendChild(document.createTextNode(text));
         }
 
         function makeRequest() {
-          let request = gapi.client.urlshortener.url.get({
+          var request = gapi.client.urlshortener.url.get({
             'shortUrl': 'http://goo.gl/fbsS'
           });
           request.then(function(response) {
@@ -34,9 +34,9 @@
 
 
       <!-- <script>
-      let apiKey = 'YOUR_API_KEY';
-      let clientId = '394585133821.apps.googleusercontent.com';
-      let scopes = 'profile';
+      var apiKey = 'YOUR_API_KEY';
+      var clientId = '394585133821.apps.googleusercontent.com';
+      var scopes = 'profile';
 
       // Get authorization from the user to access profile info
       function initAuth() {
@@ -45,7 +45,7 @@
             client_id: clientId,
             scope: scopes
         });
-        let signinButton = document.getElementById('signin-button');
+        var signinButton = document.getElementById('signin-button');
         signinButton.addEventListener("click", auth);
       }
 
@@ -69,25 +69,25 @@
           <button id="signout-button" style="display: none;">Sign Out</button>
 
           <div id="content"></div>
-
+<!-- https://developers.google.com/api-client-library/javascript/start/start-js -->
           <script type="text/javascript">
             // Enter an API key from the Google API Console:
             //   https://console.developers.google.com/apis/credentials?project=_
-            let apiKey = 'AIzaSyDWFafdDL7lofPzZPLY3RuTmacbQ3W13jk';
+            var apiKey = 'AIzaSyDWFafdDL7lofPzZPLY3RuTmacbQ3W13jk';
             // Enter a client ID for a web application from the Google API Console:
             //   https://console.developers.google.com/apis/credentials?project=_
             // In your API Console project, add a JavaScript origin that corresponds
             //   to the domain where you will be running the script.
-            let clientId = '394585133821-ibv57ohlne3vob8lmpelil7lmftrr051.apps.googleusercontent.com';
+            var clientId = '394585133821-ibv57ohlne3vob8lmpelil7lmftrr051.apps.googleusercontent.com';
             // Enter one or more authorization scopes. Refer to the documentation for
             // the API or https://developers.google.com/identity/protocols/googlescopes
             // for details.
-            let scopes = 'https://www.googleapis.com/auth/user.birthday.read';
+            var scopes = 'https://www.googleapis.com/auth/user.birthday.read';
 
 
-            let auth2; // The Sign-In object.
-            let authorizeButton = document.getElementById('authorize-button');
-            let signoutButton = document.getElementById('signout-button');
+            var auth2; // The Sign-In object.
+            var authorizeButton = document.getElementById('authorize-button');
+            var signoutButton = document.getElementById('signout-button');
             function handleClientLoad() {
               // Load the API client and auth library
               gapi.load('client:auth2', initAuth);
@@ -126,15 +126,15 @@
             // Load the API and make an API call.  Display the results on the screen.
             function makeApiCall() {
               gapi.client.load('people', 'v1', function() {
-                let request = gapi.client.people.people.get({
+                var request = gapi.client.people.people.get({
                   resourceName: 'people/me'
                 });
                 request.execute(function(resp) {
                   console.log(resp);
-                  let p = document.createElement('p');
-                  let name = resp.names[0].givenName;
-                  let lastName = resp.names[0].familyName;
-                  let birthday = resp.birthdays[0].date.day +'/'+ resp.birthdays[0].date.month;
+                  var p = document.createElement('p');
+                  var name = resp.names[0].givenName;
+                  var lastName = resp.names[0].familyName;
+                  var birthday = resp.birthdays[0].date.day +'/'+ resp.birthdays[0].date.month;
                   p.appendChild(document.createTextNode('Hello, '+name+ ' ' + lastName +
                   '!. Your birthday is ' + birthday));
                   document.getElementById('content').appendChild(p);

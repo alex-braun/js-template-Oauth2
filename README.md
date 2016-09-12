@@ -56,23 +56,25 @@ credentialing values consist of:
 These will be used by the REST API to authenticate you.\
 
 ```
-var apiKey = 'YOUR_API_KEY';
+let apiKey = 'YOUR_API_KEY';
 
-// Enter a client ID for a web application from the Google API Console:
-//   https://console.developers.google.com/apis/credentials?project=_
-// In your API Console project, add a JavaScript origin that corresponds
-//   to the domain where you will be running the script.
-var clientId = 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com';
+    // Enter a client ID for a web application from the Google API Console:
+    //   https://console.developers.google.com/apis/credentials?project=_
+    // In your API Console project, add a JavaScript origin that corresponds
+    //   to the domain where you will be running the script.
 
-// Enter one or more authorization scopes. Refer to the documentation for
-// the API or https://developers.google.com/identity/protocols/googlescopes
-// for details.
-var scopes = 'profile';
+let clientId = 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com';
 
+    // Enter one or more authorization scopes. Refer to the documentation for
+    // the API or https://developers.google.com/identity/protocols/googlescopes
+    // for details.
 
-var auth2; // The Sign-In object.
-var authorizeButton = document.getElementById('authorize-button');
-var signoutButton = document.getElementById('signout-button');
+let scopes = 'profile';
+
+let auth2; // The Sign-In object.
+let authorizeButton = document.getElementById('authorize-button');
+let signoutButton = document.getElementById('signout-button');
+
 function handleClientLoad() {
   // Load the API client and auth library
   gapi.load('client:auth2', initAuth);
@@ -84,8 +86,10 @@ function initAuth() {
       scope: scopes
   }).then(function () {
     auth2 = gapi.auth2.getAuthInstance();
+
     // Listen for sign-in state changes.
     auth2.isSignedIn.listen(updateSigninStatus);
+
     // Handle the initial sign-in state.
     updateSigninStatus(auth2.isSignedIn.get());
     authorizeButton.onclick = handleAuthClick;
@@ -111,15 +115,15 @@ function handleSignoutClick(event) {
 // Load the API and make an API call.  Display the results on the screen.
 function makeApiCall() {
   gapi.client.load('people', 'v1', function() {
-    var request = gapi.client.people.people.get({
+    let request = gapi.client.people.people.get({
       resourceName: 'people/me'
     });
     request.execute(function(resp) {
       console.log(resp);
-      var p = document.createElement('p');
-      var name = resp.names[0].givenName;
-      var lastName = resp.names[0].familyName;
-      var birthday = resp.birthdays[0].date.day +'/'+ resp.birthdays[0].date.month;
+      let p = document.createElement('p');
+      let name = resp.names[0].givenName;
+      let lastName = resp.names[0].familyName;
+      let birthday = resp.birthdays[0].date.day +'/'+ resp.birthdays[0].date.month;
       p.appendChild(document.createTextNode('Hello, '+name+ ' ' + lastName +
       '!. Your birthday is ' + birthday));
       document.getElementById('content').appendChild(p);

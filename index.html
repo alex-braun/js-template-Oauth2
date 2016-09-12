@@ -6,59 +6,6 @@
       <script src="vendor.bundle.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="bundle.js" type="text/javascript" charset="utf-8" defer></script>
       <!-- <script src="https://apis.google.com/js/api.js"></script> -->
-      <!-- <script>
-        function appendResults(text) {
-          var results = document.getElementById('results');
-          results.appendChild(document.createElement('P'));
-          results.appendChild(document.createTextNode(text));
-        }
-
-        function makeRequest() {
-          var request = gapi.client.urlshortener.url.get({
-            'shortUrl': 'http://goo.gl/fbsS'
-          });
-          request.then(function(response) {
-            appendResults(response.result.longUrl);
-          }, function(reason) {
-            console.log('Error: ' + reason.result.error.message);
-          });
-        }
-
-        function init() {
-          gapi.client.setApiKey('AIzaSyDWFafdDL7lofPzZPLY3RuTmacbQ3W13jk');
-          gapi.client.load('urlshortener', 'v1').then(makeRequest);
-        }
-
-        gapi.load('client', init);
-      </script> -->
-
-
-      <!-- <script>
-      var apiKey = 'YOUR_API_KEY';
-      var clientId = '394585133821.apps.googleusercontent.com';
-      var scopes = 'profile';
-
-      // Get authorization from the user to access profile info
-      function initAuth() {
-        gapi.client.setApiKey(apiKey);
-        gapi.auth2.init({
-            client_id: clientId,
-            scope: scopes
-        });
-        var signinButton = document.getElementById('signin-button');
-        signinButton.addEventListener("click", auth);
-      }
-
-      function auth() {
-        gapi.auth2.getAuthInstance().signIn().then(function() {
-          makeApiCall();
-        });
-      }
-
-      gapi.load('client:auth2', initAuth);
-    </script> -->
-
-
     </head>
     <body class="container-fluid">
 
@@ -68,26 +15,30 @@
           <button id="authorize-button" style="display: none;">Authorize</button>
           <button id="signout-button" style="display: none;">Sign Out</button>
 
+          <ul class = 'list'>
+
+          </ul>
+
           <div id="content"></div>
 <!-- https://developers.google.com/api-client-library/javascript/start/start-js -->
           <script type="text/javascript">
             // Enter an API key from the Google API Console:
             //   https://console.developers.google.com/apis/credentials?project=_
-            var apiKey = 'AIzaSyDWFafdDL7lofPzZPLY3RuTmacbQ3W13jk';
+            let apiKey = 'YOUR_API_KEY';
             // Enter a client ID for a web application from the Google API Console:
             //   https://console.developers.google.com/apis/credentials?project=_
             // In your API Console project, add a JavaScript origin that corresponds
             //   to the domain where you will be running the script.
-            var clientId = '394585133821-ibv57ohlne3vob8lmpelil7lmftrr051.apps.googleusercontent.com';
+            let clientId = 'YOUR_WEB_CLIENT_ID.apps.googleusercontent.com';
             // Enter one or more authorization scopes. Refer to the documentation for
             // the API or https://developers.google.com/identity/protocols/googlescopes
             // for details.
-            var scopes = 'https://www.googleapis.com/auth/user.birthday.read';
+            let scopes = 'profile';
 
 
-            var auth2; // The Sign-In object.
-            var authorizeButton = document.getElementById('authorize-button');
-            var signoutButton = document.getElementById('signout-button');
+            let auth2; // The Sign-In object.
+            let authorizeButton = document.getElementById('authorize-button');
+            let signoutButton = document.getElementById('signout-button');
             function handleClientLoad() {
               // Load the API client and auth library
               gapi.load('client:auth2', initAuth);
@@ -123,38 +74,64 @@
             function handleSignoutClick(event) {
               auth2.signOut();
             }
-            // Load the API and make an API call.  Display the results on the screen.
+  // Load the API and make an API call.  Display the results on the screen.
             function makeApiCall() {
-              gapi.client.load('people', 'v1', function() {
-                var request = gapi.client.people.people.get({
-                  resourceName: 'people/me'
+            gapi.client.load('people', 'v1').then(function() {
+                let request = gapi.client.people.people.connections.list({
+                    resourceName: 'people/me',
+                    pageSize: 200,
+                    fields: 'connections(resourceName)'
                 });
+
                 request.execute(function(resp) {
-                  console.log(resp);
-                  var p = document.createElement('p');
-                  var name = resp.names[0].givenName;
-                  var lastName = resp.names[0].familyName;
-                  var birthday = resp.birthdays[0].date.day +'/'+ resp.birthdays[0].date.month;
-                  p.appendChild(document.createTextNode('Hello, '+name+ ' ' + lastName +
-                  '!. Your birthday is ' + birthday));
-                  document.getElementById('content').appendChild(p);
+                    if (resp.connections){
+                      let batch = gapi.client.newBatch();
+                      let emails = [];
+                      for(let i = 0; i < resp.connections.length; i++){
+                        let req = gapi.client.people.people.get({
+                          resourceName: resp.connections[i].resourceName,
+                          fields: "emailAddresses(value)"
+                          });
+                          batch.add(req);
+                          req.then(function (email){
+                            let idx = email.body.indexOf("{");
+                            let jsonString = email.body.substring(idx > 0 ? idx : 0);
+                            let obj;
+                            try {
+                            obj = JSON.parse(jsonString);
+                            if (obj.emailAddresses){
+                                for (j = 0; j < obj.emailAddresses.length; j++){
+                                    emails.push(obj.emailAddresses[j].value);
+                                }
+                              }
+                            }
+                            catch (err) {
+                            console.error(email);
+                            }
+                        })
+                      }
+                        batch.then(function (){
+                          console.log(emails);
+                          let fullList = '';
+                          for (let i = 0; i < emails.length; i++){
+                            fullList += '<li>' + emails[i] + '</li>';
+                          }
+                            $('.list').append(fullList);
+
+                        }, function (err){
+                          console.error(err);
+                        });
+                    } else {
+                      console.error("Error", resp);
+                    }
                 });
-              });
-              // Note: In this example, we use the People API to get the current
-              // user's name. In a real app, you would likely get basic profile info
-              // from the GoogleUser object to avoid the extra network round trip.
-              console.log(auth2.currentUser.get().getBasicProfile().getGivenName());
-            }
+            }, function (err){
+                console.error(err);
+            });
+
+        }
           </script>
           <script src="https://apis.google.com/js/api.js?onload=handleClientLoad"></script>
-
-
-
-
-<!--
-      <div id="results"></div>
-       <button id="signin-button">Sign in</button>
-      <a href ="oauth.html">Link</a> -->
 
     </body>
 </html>

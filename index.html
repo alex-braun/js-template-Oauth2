@@ -5,59 +5,6 @@
 
       <script src="vendor.bundle.js" type="text/javascript" charset="utf-8" defer></script>
       <script src="bundle.js" type="text/javascript" charset="utf-8" defer></script>
-      <!-- <script src="https://apis.google.com/js/api.js"></script> -->
-      <!-- <script>
-        function appendResults(text) {
-          var results = document.getElementById('results');
-          results.appendChild(document.createElement('P'));
-          results.appendChild(document.createTextNode(text));
-        }
-
-        function makeRequest() {
-          var request = gapi.client.urlshortener.url.get({
-            'shortUrl': 'http://goo.gl/fbsS'
-          });
-          request.then(function(response) {
-            appendResults(response.result.longUrl);
-          }, function(reason) {
-            console.log('Error: ' + reason.result.error.message);
-          });
-        }
-
-        function init() {
-          gapi.client.setApiKey('AIzaSyDWFafdDL7lofPzZPLY3RuTmacbQ3W13jk');
-          gapi.client.load('urlshortener', 'v1').then(makeRequest);
-        }
-
-        gapi.load('client', init);
-      </script> -->
-
-
-      <!-- <script>
-      var apiKey = 'YOUR_API_KEY';
-      var clientId = '394585133821.apps.googleusercontent.com';
-      var scopes = 'profile';
-
-      // Get authorization from the user to access profile info
-      function initAuth() {
-        gapi.client.setApiKey(apiKey);
-        gapi.auth2.init({
-            client_id: clientId,
-            scope: scopes
-        });
-        var signinButton = document.getElementById('signin-button');
-        signinButton.addEventListener("click", auth);
-      }
-
-      function auth() {
-        gapi.auth2.getAuthInstance().signIn().then(function() {
-          makeApiCall();
-        });
-      }
-
-      gapi.load('client:auth2', initAuth);
-    </script> -->
-
 
     </head>
     <body class="container-fluid">
@@ -148,13 +95,6 @@
           </script>
           <script src="https://apis.google.com/js/api.js?onload=handleClientLoad"></script>
 
-
-
-
-<!--
-      <div id="results"></div>
-       <button id="signin-button">Sign in</button>
-      <a href ="oauth.html">Link</a> -->
 
     </body>
 </html>

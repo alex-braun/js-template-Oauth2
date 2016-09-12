@@ -9,7 +9,7 @@ This is an authorization protocol, rather than an authentication protocol.
 - Authentication deals with verifying your identity.
 - Once authentication has been verified, authorization asks "What are you allowed?"
 
-![alt tag](https://en.wikipedia.org/wiki/File:OpenIDvs.Pseudo-AuthenticationusingOAuth.svg)
+![picture](OpenIDvs.Pseudo-AuthenticationusingOAuth.svg.png)
 
 
 

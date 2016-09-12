@@ -22,6 +22,4 @@ This is an authorization protocol, rather than an authentication protocol.
 - The application decodes the identity provider's response, and carries on accordingly.
 - (OAuth only) The response includes an access token which the application can use to gain direct access to the identity provider's services on the user's behalf.
 
-```
-
-```
+![picture](abstract_flow.png)
